@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:${database.type}://${database.postgres.host}:${database.postgres.port}/${database.postgres.name}
+    username: ${database.postgres.username}
+    password: ${database.postgres.password}
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+database:
+  type: postgresql
+  postgres:
+    host: localhost
+    port: 5432
+    name: postgres
+    username: postgres
+    password: password
+
+jwt:
+  signingKey: secret
+  accessTokenDuration: 1
+  refreshTokenDuraion: 60
