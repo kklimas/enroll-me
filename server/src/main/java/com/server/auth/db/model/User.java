@@ -1,6 +1,7 @@
 package com.server.auth.db.model;
 
-import com.server.auth.enums.CustomUserRole;
+import com.server.auth.enums.UserRole;
+import com.server.enrollment.db.relation.model.EnrollmentRelation;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -16,7 +18,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomUser {
+@Table(name = "participant")
+public class User {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -29,10 +32,11 @@ public class CustomUser {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private CustomUserRole role;
+    private UserRole role;
 
     @NotNull
     private String address;
     private Date joinDate;
+
 }
 

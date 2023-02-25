@@ -11,3 +11,4 @@ public class ServerApplication {
 	}
 
 }
+// todo enrollment process validation, handling exceptions

@@ -1,18 +1,18 @@
 package com.server.config;
 
-import com.server.CustomUserService;
+import com.server.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import static com.server.auth.mapper.CustomUserMapper.toDetails;
+import static com.server.auth.mapper.UserMapper.toDetails;
 
 
 @Configuration
 @RequiredArgsConstructor
 public class UserDetailsConfig {
-    private final CustomUserService userAuthService;
+    private final UserService userAuthService;
 
     @Bean
     public UserDetailsService findUserByUsername() {

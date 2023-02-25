@@ -3,6 +3,6 @@ package com.server.auth.enums;
 import lombok.Getter;
 
 @Getter
-public enum CustomUserRole {
+public enum UserRole {
     ROLE_ADMIN, ROLE_USER;
 }

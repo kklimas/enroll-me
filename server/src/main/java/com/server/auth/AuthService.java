@@ -1,6 +1,6 @@
 package com.server.auth;
 
-import com.server.auth.db.repository.CustomUserRepository;
+import com.server.auth.db.repository.UserRepository;
 import com.server.auth.dto.AuthResponseDTO;
 import com.server.auth.dto.UserLoginDTO;
 import com.server.auth.dto.UserRegisterDTO;
@@ -14,15 +14,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static com.server.auth.mapper.CustomUserMapper.fromDTO;
+import static com.server.auth.mapper.UserMapper.fromDTO;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthenticationManager authenticationManager;
-    private final CustomUserRepository customUserRepository;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
     private final JwtService jwtUtils;
 
     public AuthResponseDTO login(UserLoginDTO userLoginDTO) {
@@ -35,13 +35,13 @@ public class AuthService {
         isEmailTaken(userRegisterDTO.getEmail());
         var encodedPassword = passwordEncoder.encode(userRegisterDTO.getPassword());
         userRegisterDTO.setPassword(encodedPassword);
-        customUserRepository.save(fromDTO(userRegisterDTO));
+        userRepository.save(fromDTO(userRegisterDTO));
         var user = userDetailsService.loadUserByUsername(userRegisterDTO.getEmail());
         return givenAuthResponse(user);
     }
 
     private void isEmailTaken(String email) {
-        var isEmailTaken = customUserRepository.existsCustomUserByEmail(email);
+        var isEmailTaken = userRepository.existsUserByEmail(email);
         if (isEmailTaken) {
             throw new UserExistsException("User with given email already exists.");
         }

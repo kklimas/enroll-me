@@ -6,18 +6,21 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 database:
   type: postgresql
   postgres:
     host: localhost
     port: 5432
-    name: postgres
+    name: enroll
     username: postgres
     password: password
 
 jwt:
   signingKey: secret
   accessTokenDuration: 1
-  refreshTokenDuraion: 60
+  refreshTokenDuration: 3600
+
+server:
+  port: 8099

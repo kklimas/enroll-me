@@ -1,7 +1,7 @@
 package com.server.web;
 
-import com.server.auth.db.model.CustomUser;
-import com.server.auth.db.repository.CustomUserRepository;
+import com.server.UserService;
+import com.server.auth.db.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-public class CustomUserController {
-    private final CustomUserRepository customUserRepository;
+public class UserController {
+
+    private final UserService userService;
+
     @GetMapping
-    public List<CustomUser> findAllUsers() {
-        return customUserRepository.findAll();
+    public List<User> findAllUsers() {
+        return userService.findAll();
     }
 }
