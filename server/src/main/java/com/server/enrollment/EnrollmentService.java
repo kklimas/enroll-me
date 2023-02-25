@@ -9,13 +9,17 @@ import com.server.enrollment.dto.EnrollUserDTO;
 import com.server.enrollment.dto.EnrollmentCreationDTO;
 import com.server.enrollment.dto.EnrollmentDTO;
 import com.server.enrollment.mapper.EnrollmentMapper;
+import com.server.managment.ManagementService;
+import com.server.managment.subject.db.StudySubject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +27,7 @@ public class EnrollmentService {
 
     private final EnrollmentRelationRepository enrollmentRelationRepository;
     private final EnrollmentRepository enrollmentRepository;
+    private final ManagementService managementService;
     private final UserService userService;
 
     public List<EnrollmentDTO> findAllEnrollments() {
@@ -43,7 +48,8 @@ public class EnrollmentService {
     }
 
     public void createEnrollment(EnrollmentCreationDTO enrollmentCreationDTO) {
-        enrollmentRepository.save(EnrollmentMapper.fromDTO(enrollmentCreationDTO));
+        var subjects = new HashSet<>(managementService.findSubjectByIds(enrollmentCreationDTO.getSubjectIds()));
+        enrollmentRepository.save(EnrollmentMapper.fromDTO(enrollmentCreationDTO, subjects));
     }
 
     public void enrollUsers(EnrollUserDTO enrollUserDTO) {

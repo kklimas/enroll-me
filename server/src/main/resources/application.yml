@@ -8,6 +8,10 @@ spring:
     hibernate:
       ddl-auto: validate
 
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: Europe/Warsaw
+
 database:
   type: postgresql
   postgres:

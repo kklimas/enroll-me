@@ -1,6 +1,7 @@
-package com.server.enrollment.db.enrollment.model;
+package com.server.managment.subject.db;
 
-import com.server.managment.subject.db.StudySubject;
+import com.server.enrollment.db.enrollment.model.Enrollment;
+import com.server.managment.event.db.Event;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,15 +16,13 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Enrollment {
-
+public class StudySubject {
     @Id
     @GeneratedValue(generator = "uuid")
     private UUID id;
+    private String name;
 
-    private String description;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "enrollment_id", referencedColumnName = "id")
-    private Set<StudySubject> subjects;
-    private boolean isOpened = false;
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    private Set<Event> events;
 }
