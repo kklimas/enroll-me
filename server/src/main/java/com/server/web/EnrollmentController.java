@@ -1,7 +1,6 @@
 package com.server.web;
 
 import com.server.enrollment.EnrollmentService;
-import com.server.enrollment.dto.EnrollUserDTO;
 import com.server.enrollment.dto.EnrollmentCreationDTO;
 import com.server.enrollment.dto.EnrollmentDTO;
 import lombok.RequiredArgsConstructor;
@@ -30,15 +29,5 @@ public class EnrollmentController {
     @PostMapping
     public void createEnrollment(@RequestBody EnrollmentCreationDTO enrollmentCreationDTO) {
         enrollmentService.createEnrollment(enrollmentCreationDTO);
-    }
-
-    @PostMapping("/enroll")
-    public void enrollUsers(@RequestBody EnrollUserDTO enrollUserDTO) {
-        enrollmentService.enrollUsers(enrollUserDTO);
-    }
-
-    @DeleteMapping("/unroll")
-    public void unrollUsers(@RequestBody EnrollUserDTO unrollUserDTO) {
-        enrollmentService.unrollUsers(unrollUserDTO);
     }
 }

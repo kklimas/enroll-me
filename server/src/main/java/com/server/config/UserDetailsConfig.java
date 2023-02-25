@@ -1,6 +1,6 @@
 package com.server.config;
 
-import com.server.UserService;
+import com.server.auth.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

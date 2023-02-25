@@ -1,19 +1,16 @@
 package com.server.auth.db.model;
 
 import com.server.auth.enums.UserRole;
-import com.server.enrollment.db.relation.model.EnrollmentRelation;
+import com.server.enrollment.db.preference.model.Preference;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 import java.util.UUID;
 
-@Getter
+@Data
 @Entity
 @Builder
 @NoArgsConstructor
@@ -38,5 +35,8 @@ public class User {
     private String address;
     private Date joinDate;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "participant_id", referencedColumnName = "id")
+    private Set<Preference> preferences;
 }
 

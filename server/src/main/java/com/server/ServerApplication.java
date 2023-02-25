@@ -11,4 +11,8 @@ public class ServerApplication {
 	}
 
 }
+// todo enable user to set preferences for saved enrollment
+
 // todo enrollment process validation, handling exceptions
+// todo code refactor
+// todo tests

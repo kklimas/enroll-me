@@ -1,8 +1,7 @@
-package com.server;
+package com.server.auth;
 
 import com.server.auth.db.model.User;
 import com.server.auth.db.repository.UserRepository;
-import com.server.enrollment.db.enrollment.model.Enrollment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Function;
 
 @Configuration
 @Service
@@ -37,5 +35,9 @@ public class UserService {
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 }

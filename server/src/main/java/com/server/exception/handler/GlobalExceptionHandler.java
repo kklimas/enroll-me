@@ -2,6 +2,7 @@ package com.server.exception.handler;
 
 import com.server.exception.UserExistsException;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.InvalidClaimException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -23,7 +24,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return givenAuthenticationResponse(ex.getMessage());
     }
 
-    @ExceptionHandler(UserExistsException.class)
+    @ExceptionHandler({UserExistsException.class, InvalidClaimException.class})
     protected ResponseEntity<Object> handleBadRequest(RuntimeException exception) {
         return givenResponse(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
